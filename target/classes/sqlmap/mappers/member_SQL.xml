@@ -2,4 +2,59 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.board.service.impl.MemberMapper">
 
+	<resultMap type="com.board.VO.MemberVO" id="Member">
+		<result property="m_uid" column="m_uid" />
+		<result property="userId" column="m_id" />
+		<result property="password" column="m_password" />
+		<result property="nickName" column="m_nickname" />
+		<result property="email" column="m_email" />
+	</resultMap>
+
+	<select id="searchUser" resultType="Integer"
+		parameterType="MemberVO">
+
+		Select
+		m_uid
+		From
+		Member
+		WHERE
+		m_id=#{userId}
+		AND
+		m_password=#{password}
+	</select>
+
+	<select id="findDuplicateId" resultType="Integer"
+		parameterType="MemberVO">
+
+		SELECT
+		m_uid
+		FROM
+		MEMBER
+		WHERE
+		m_id = #{userId}
+
+	</select>
+
+	<insert id="insertUser" parameterType="MemberVO">
+		<selectKey keyProperty="m_uid" resultType="int"
+			order="AFTER">
+			SELECT nvl(MEMBER_pk_seq.CURRVAL, 0)FROM DUAL
+		</selectKey>
+
+		isnert into
+		Member(
+		m_uid,
+		m_id,
+		m_nickname,
+		m_email,
+		m_password
+		)
+		VALUES(
+		member_pk_seq.NEXTVAL,
+		#{userId},
+		#{nickName},
+		#{email},
+		#{password}
+		)
+	</insert>
 </mapper>

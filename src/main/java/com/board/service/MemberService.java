@@ -2,9 +2,13 @@ package com.board.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.board.VO.MemberVO;
+
 public interface MemberService {
 
-	// boolean searchUser(String id, String password, HttpServletRequest request)
-	// throws Exception;
+	Integer findDuplicateid(MemberVO vo);
 
+	int insertUser(MemberVO vo, HttpServletRequest request);
+
+	Integer searchUser(HttpServletRequest request, MemberVO vo) throws Exception;
 }
