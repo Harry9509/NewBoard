@@ -38,8 +38,8 @@
 			<div class="login-form">
 				<form id="LoginForm" name="LoginForm" method="post">
 					<div class="form-group">
-						<input type="hidden" id="RSAModulus" value="${RSAModulus }" /> <input
-							type="hidden" id="RSAExponent" value="${RSAExponent }" />
+						<input type="hidden" id="RSAModulus" value="${RSAModulus}" /> <input
+							type="hidden" id="RSAExponent" value="${RSAExponent}" />
 					</div>
 					<div class="form-group">
 						<label>User Name</label> <input type="text" class="form-control"

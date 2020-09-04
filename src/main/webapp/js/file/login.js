@@ -3,6 +3,7 @@ $(document).ready(function(){
 	$('#submitBtn').on('click', function(e) {
 		login();
 		
+		alert('AJAX 되는지 확인')
 		var data = $('#LoginForm').serializeArray();
 		
 		console.log(data);
@@ -39,7 +40,7 @@ $(document).ready(function(){
 function login(){
     var id = $("#userId");
     var pw = $("#password");
-
+    
     if(id.val() == ""){
         alert("아이디를 입력 해주세요.");
         id.focus();

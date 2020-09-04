@@ -18,7 +18,7 @@ public class MemberServiceImpl implements MemberService {
 	@Resource(name = "memberMapper")
 	private MemberMapper memberMapper;
 
-	@Resource(name = "SecurityUtil")
+	@Resource(name = "securityUtil")
 	private SecurityUtil securityUtil;
 
 	@Override
