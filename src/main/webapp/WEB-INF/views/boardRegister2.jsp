@@ -105,6 +105,9 @@
 					<tr>
 						<td class="tbtd_caption"><label for="userid">ID</label></td>
 						<td class="tbtd_content"><c:if test="${type == 'modify' }">
+						
+						
+						
 								<input name="userid" id="userid" class="essentiality"
 									maxlength="10" value="${sessionScope.S_ID}" />
 							</c:if> <c:if test="${type == 'view' }">
@@ -178,25 +181,24 @@
 							style="margin-left: 6px;" alt="" />
 					</span></li>
 					<li><c:if test="${type != 'view' }">
-							<span class="btn_blue_l"> <a
-								href="javascript:fn_egov_save();"> <c:if
-										test="${type == 'create'}">작성</c:if> <c:if
-										test="${type == 'modify' && boardVO.m_uid == sessionScope.m_uid}">수정</c:if>
-							</a> <img src="<c:url value='/images/btn_bg_r.gif'/>"
-								style="margin-left: 6px;" alt="" />
-							</span>
-						</c:if> <c:if
-							test="${type == 'view' && boardVO.m_uid == sessionScope.m_uid}">
-							<span class="btn_blue_l"> <a
-								href="javascript:fn_egov_modify()">수정</a> <img
-								src="<c:url value='/images/btn_bg_r.gif'/>"
-								style="margin-left: 6px;" alt="" />
-							</span>
-						</c:if></li>
-					<c:if
-						test="${type != 'create' && boardVO.m_uid == sessionScope.m_uid}">
-						<li><span class="btn_blue_l"> <a
-								href="javascript:fn_egov_delete();">삭제</a> <img
+							<span class="btn_blue_l"> 
+								<a	href="javascript:fn_egov_save();"> 
+									<c:if test="${type == 'create'}">작성</c:if> 
+									<c:if test="${type == 'modify' && boardVO.m_uid == sessionScope.m_uid}">수정</c:if>
+							</a> <img src="<c:url value='/images/btn_bg_r.gif'/>" style="margin-left: 6px;" alt="" />
+							</span>	</c:if> 
+							
+							<c:if test="${type == 'view' && boardVO.m_uid == sessionScope.m_uid}">
+								<span class="btn_blue_l"> 
+									<a href="javascript:fn_egov_modify()">수정</a> 
+									<img src="<c:url value='/images/btn_bg_r.gif'/>" style="margin-left: 6px;" alt="" />
+								</span>
+							</c:if>
+							</li>
+								<c:if test="${type != 'create' && boardVO.m_uid == sessionScope.m_uid}">
+							<li>
+							<span class="btn_blue_l">
+							 <a	href="javascript:fn_egov_delete();">삭제</a> <img
 								src="<c:url value='/images/btn_bg_r.gif'/>"
 								style="margin-left: 6px;" alt="" />
 						</span></li>
