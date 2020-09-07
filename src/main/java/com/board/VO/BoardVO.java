@@ -1,5 +1,8 @@
 package com.board.VO;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("boardVO")
 public class BoardVO extends BoardDefaultVO {
 
 	private static final long serialVersionUID = 1L;

@@ -1,5 +1,8 @@
 package com.board.VO;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("fileVO")
 public class FileVO {
 	private int f_uid;
 	

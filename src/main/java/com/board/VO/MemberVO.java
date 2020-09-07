@@ -1,5 +1,8 @@
 package com.board.VO;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("memberVO")
 public class MemberVO {
 	private int m_uid;
 	

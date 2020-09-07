@@ -4,7 +4,10 @@
 <configuration>
     <typeAliases>
 		<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+		<typeAlias alias="searchVO" type="com.board.VO.BoardDefaultVO"/>
 		<typeAlias alias="memberVO" type="com.board.VO.MemberVO"/>		
+		<typeAlias alias="boardVO" type="com.board.VO.BoardVO"/>		
+		<typeAlias alias="fileVO" type="com.board.VO.FileVO"/>		
     </typeAliases>
 	
 </configuration>
