@@ -18,7 +18,7 @@
 		SELECT
 			*
 		FROM
-			board
+			board2
 		WHERE
 			br_uid = #{uid}
 	</select>
@@ -28,7 +28,7 @@
 			<![CDATA[SELECT nvl(#{uid},0)] FROM DUAL]]>
 		</selectKey>
 		UPDATE
-			board
+			board2
 		SET
 			br_subjct = #{subject},
 			br_content = #{content}
@@ -38,7 +38,7 @@
 
 	<delete id="deleteBoard" parameterType="boardVO">
 		DELETE FROM
-			board
+			board2
 		WHERE
 			br_uid =#{uid}
 	</delete>
@@ -49,7 +49,7 @@
 	</selectKey>
 	
 	INSERT INTO
-		BOARD(
+		BOARD2(
 			br_uid,
 			m_uid,
 			br_subject,
@@ -71,7 +71,7 @@
 			SELECT A.*,
 				ROWNUM AS "rnum"
 			FROM
-				board A
+				board2 A
 			ORDER BY
 				br_uid DESC
 			) BR
@@ -85,7 +85,7 @@
 		SELECT
 			count(*) totCnt
 		FROM
-			board
+			board2
 	</select>
 	
 	
