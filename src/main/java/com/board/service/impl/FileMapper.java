@@ -23,4 +23,7 @@ public interface FileMapper {
 
 	int updateKFbyUids(@Param("fileUids") String[] fileUids, @Param("br_uid") int br_uid);
 
+	
+	
+	
 }

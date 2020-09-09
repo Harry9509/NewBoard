@@ -95,6 +95,7 @@ public class FileMngUtil {
 
 		File tmpFile = new File(saveFilePath);
 		long filelength = tmpFile.length();
+		
 		response.setHeader("Content-Disposition", "attachment; filename=\"" + file.getOriginalName() + "\";");
 		response.setHeader("Content-Transfer-Encoding", "binary");
 		response.setHeader("Content-Type", ext);

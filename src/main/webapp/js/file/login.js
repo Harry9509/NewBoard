@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
 	$('#submitBtn').on('click', function(e) {
 		login();
@@ -62,5 +61,3 @@ function login(){
     pw.val("");
 
 }
-
-
