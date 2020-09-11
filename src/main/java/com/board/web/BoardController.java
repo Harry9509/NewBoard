@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.board.VO.BoardDefaultVO;
 import com.board.VO.BoardVO;
 import com.board.service.BoardService;
+import com.board.service.FileMngUtil;
+import com.board.service.FileService;
 import com.board.service.MemberService;
 
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
@@ -30,6 +32,12 @@ public class BoardController {
 
 	@Resource(name = "memberService")
 	private MemberService memberService;
+
+	@Resource(name = "fileMngUtil")
+	private FileMngUtil fileMngUtil;
+
+	@Resource(name = "fileService")
+	private FileService fileService;
 
 	@RequestMapping(value = "/board.do")
 	public String selectBoardList(@ModelAttribute("searchVO") BoardDefaultVO searchVO, ModelMap model) {
@@ -65,11 +73,12 @@ public class BoardController {
 		System.out.println("boardController : addBoard");
 		model.addAttribute("boardVO", new BoardVO());
 		model.addAttribute("type", "create");
-		
-		BoardVO boardVO = new BoardVO();
-		System.out.println("..........." + boardVO.getM_uid() + "m_uid 가져와봐");
-		System.out.println("..........." + boardVO.getUid() + "uid 가져와봐");
 
+		/*
+		 * BoardVO boardVO = new BoardVO(); System.out.println("..........." +
+		 * boardVO.getM_uid() + "m_uid 가져와봐"); System.out.println("..........." +
+		 * boardVO.getUid() + "uid 가져와봐");
+		 */
 		return "boardRegister";
 	}
 
@@ -79,14 +88,15 @@ public class BoardController {
 		System.out.println("boardController : addBoardDO");
 		System.out.println(boardVO.toString());
 		System.out.println(Arrays.toString(fileUids));
-		System.out.println(boardVO + "boardVO가 뭐야?");
-		System.out.println("....." + boardVO.getM_uid() + "m_uid가져와봐 ");
-		System.out.println("..........." + boardVO.getUid() + "uid가져와봐 ");
-			
+
 		int uid = boardService.insertBoard(boardVO);
 
 		model.addAttribute("uid", String.valueOf(uid));
+		if (fileUids != null && fileUids.length > 0) {
+			fileService.updateFKbyUids(fileUids, uid);
+		}
 
+		model.addAttribute("uid", String.valueOf(uid));
 		System.out.println("작성완료하였습니다.");
 		return "redirect:/view.do";
 
@@ -107,6 +117,21 @@ public class BoardController {
 		model.addAttribute("type", "modify");
 
 		return "boardRegister";
+	}
+
+	@RequestMapping(value = "/updateView.do", method = RequestMethod.POST)
+	public String updateBoard(@RequestParam("uid") String uid, Model model) {
+		System.out.println("boardController : updateBoard");
+		BoardVO board = new BoardVO();
+		board.setUid(Integer.parseInt(uid));
+
+		board = boardService.selectBoard(board);
+
+		System.out.println(board.toString());
+		model.addAttribute("boardVO", board);
+		model.addAttribute("type", "modify");
+		return "boardRegister";
+
 	}
 
 	@RequestMapping(value = "/updateBoard.do", method = RequestMethod.POST)
