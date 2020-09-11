@@ -77,4 +77,11 @@ public class FileServiceImpl implements FileService {
 
 	}
 
+	@Override
+	public void deleteFileByBoard(List<FileVO> fileList) {
+		fileUtil.delteFiles(fileList);
+		// TODO Auto-generated method stub
+		
+	}
+
 }

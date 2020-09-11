@@ -22,4 +22,6 @@ public interface FileService {
 
 	int updateFKbyUids(String[] fileUids, int br_uid);
 
+	void deleteFileByBoard(List<FileVO> fileList);
+
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.board.VO.BoardDefaultVO;
 import com.board.VO.BoardVO;
+import com.board.VO.FileVO;
 import com.board.service.BoardService;
 import com.board.service.FileMngUtil;
 import com.board.service.FileService;
@@ -144,6 +145,9 @@ public class BoardController {
 		int uid = boardVO.getUid();
 
 		boardService.updateBoard(boardVO);
+		if (fileUids != null && fileUids.length > 0) {
+			fileService.updateFKbyUids(fileUids, uid);
+		}
 
 		model.addAttribute("uid", String.valueOf(uid));
 		return "redirect:/view.do";
@@ -153,7 +157,16 @@ public class BoardController {
 	public String deleteBoard(@RequestParam("uid") String uid, Model model) {
 		BoardVO board = new BoardVO();
 		board.setUid(Integer.parseInt(uid));
+		List<FileVO> fileList = fileService.selectFilesByBoardUid(board.getUid());
 		boardService.deleteBoard(board);
+		
+		for(FileVO f : fileList) {
+			System.out.println(f.toString()+"\n"+"여기 위치는, BoardController입니다.");
+		}
+		if(fileList.size()>0
+				) {
+			fileService.deleteFileByBoard(fileList);
+		}
 		System.out.println("delete data from board where uid = " + board.getUid());
 
 		return "redirect:/board.do";
