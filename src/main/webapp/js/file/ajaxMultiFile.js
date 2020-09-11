@@ -135,7 +135,8 @@ function appendFileRow(file, type) {
 	
 	if (type == 'view') {
 		html += '<tr id="fileList_' + file.f_uid + '">';
-		html += '<td><a href="/Board/file/download.do?br_uid='+ br_uid +'&f_uid=' + file.f_uid + '">' + file.originalName + ' (' + file.parseSize + ')' + '</a></td>';
+		html += '<td><a href="/Board/file/download.do?br_uid='+ br_uid +'&f_uid=' + file.f_uid 
+		+ '">' + file.originalName + ' (' + file.parseSize + ')' + '</a></td>';
 		// html += '<td>' + '<button type="button" class="deleteBtn"
 		// onclick="deleteFileData(' + file.f_uid + ')">Delete</button>'
 		// +'</td>';

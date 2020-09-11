@@ -30,48 +30,48 @@
 	
 	<select id = "selectFilesByBoardUid" resultMap = "file">
 		SELECT
-		*
+			*
 		FROM
 			files
 		WHERE
 			br_uid = #{br_uid}
 	</select>
-	<insert id = "insertFileData" parameterType = "fileVO">
 	
-	<selectKey keyProperty="f_uid" resultType="int" order="BEFORE">
-	INSERT INTO
-		 files(
-		 	f_uid,
-		 	f_realpath,
-		 	f_originalname,
-		 	f_size,
-		 	f_parsesize,
-		)VALUES(
-		 	#{f_uid},
-		 	#{realPath},
-		 	#{originalName},
-		 	#{size},
-		 	#{parseSize}
-		 	)
-	</selectKey>
+	<insert id ="insertFileData" parameterType ="fileVO">
+		<selectKey keyProperty="f_uid" resultType="int" order="BEFORE">
+			SELECT NVL(get_file_seq, 0) FROM DUAL
+		</selectKey>
+		INSERT INTO
+			 files (
+			 	f_uid,
+			 	f_realpath,
+			 	f_originalname,
+		 		f_size,
+		 		f_parsesize
+			) VALUES (
+			 	#{f_uid},
+			 	#{realPath},
+			 	#{originalName},
+			 	#{size},
+			 	#{parseSize}
+			)
 	</insert>
 	
-	<delete id = "delteFileByUid" parameterType = "fileVO" flushCache ="true">
-	DELETE FROM 
-		files
-	WHERE
-		f_uid = #{f_uid}
+	<delete id="deleteFileByUid" parameterType="fileVO" flushCache="true">
+		DELETE FROM 
+			files
+		WHERE
+			f_uid = #{f_uid}
 	</delete>
 	
-	<update id = "updateFKbyUids">
-	UPDATE
-		files
-	SET
-		br_uid =#{br_uid}
-	WHERE
-		<foreach collection = "fileUids" item= "f_uid" open ="" close="" separator="OR">
-			f_uid =#{f_uid}
-		</foreach>
-		
+	<update id ="updateFKbyUids">
+		UPDATE
+			files
+		SET
+			br_uid = #{br_uid}
+		WHERE
+			<foreach collection="fileUids" item="f_uid" open="" close="" separator="OR">
+				f_uid =#{f_uid}
+			</foreach>
 	</update>
 </mapper>

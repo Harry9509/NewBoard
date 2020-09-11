@@ -49,7 +49,7 @@ public class FileMngUtil {
 			String dataName = saveName.toString().substring(0, 10) + ext;
 			String realPath = SAVE_PATH + File.separator + dataName;
 			fileVO.setOriginalName(originalName);
-			fileVO.setRealPath(realPath);
+			fileVO.setRealPath(dataName);
 			fileVO.setSize(size);
 			fileVO.setParseSize(parseSize(size));
 
