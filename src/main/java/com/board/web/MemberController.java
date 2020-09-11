@@ -1,7 +1,10 @@
 package com.board.web;
 
+import java.security.PrivateKey;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,12 +57,42 @@ public class MemberController {
 
 	@RequestMapping(value = "/loginCK.do", method = RequestMethod.POST)
 	public @ResponseBody String login(HttpServletRequest request, MemberVO vo) throws Exception {
-		
-		System.out.println("로그인 체크중.");
 
-		Integer m_uid = memberService.searchUser(request, vo);
-		String M_UID = Integer.toString(m_uid);
-		System.out.println(M_UID+"........"+"m_UID가 잘 들어왔는지 확인.");
-		return "success";
+		String userId = "";
+		String pw = "";
+
+		if (request.getParameter("userId") != null) {
+			userId = request.getParameter("userId");
+		}
+		if (request.getParameter("password") != null) {
+			pw = request.getParameter("password");
+		}
+		System.out.println(pw + "\n" + userId);
+		HttpSession session = request.getSession();
+
+		PrivateKey privateKey = (PrivateKey) session.getAttribute(securityUtil.getRSA_WEB_KEY());
+		userId = securityUtil.decryptRsa(privateKey, userId);
+		String rowPw = securityUtil.decryptRsa(privateKey, pw);
+		String eccryPassword = securityUtil.cipherSHA256(rowPw);
+
+		vo.setUserId(userId);
+		vo.setPassword(eccryPassword);
+
+		Integer m_uid = memberService.searchUser(vo);
+		if (m_uid != null) {
+			session.setAttribute("S_ID", userId);
+			session.setAttribute("m_uid", m_uid);
+			return "success";
+		} else {
+			return "fail";
+		}
+
+		/*
+		 * System.out.println("로그인 체크중.");
+		 * 
+		 * Integer m_uid = memberService.searchUser(request, vo); String M_UID =
+		 * Integer.toString(m_uid);
+		 * System.out.println(M_UID+"........"+"m_UID가 잘 들어왔는지 확인."); return "success";
+		 */
 	}
 }

@@ -93,10 +93,10 @@
 					<tr>
 						<td class="tbtd_caption"><label for="userid">ID</label></td>
 						<td class="tbtd_content"><c:if test="${type=='modify'}">
-								<input name="userid" id="userid" class="essentiality" max
-									length="10" value="${sessionScope.S_ID}" />
+								<input name="userid" id="userid" class="essentiality"
+									maxlength="10" value="${sessionScope.S_ID}" />
 							</c:if> <c:if test="${type =='view'}">
-								<c:out value="${sessionScope.S_ID }" />
+								<c:out value="${sessionScope.S_ID}" />
 							</c:if> <c:if test="${type=='create' }">
 								<input type="text" id="userid" maxlength="30" class="txt"
 									value="${sessionScope.S_ID}" />
@@ -110,7 +110,7 @@
 							</c:if> <c:if test="${type =='view'}">
 								<c:out value="${boardVO.subject }" />
 							</c:if> <c:if test="${type == 'create'}">
-								<input name="subject" id="subject" maxlngth="30" class="txt" />
+								<input name="subject" id="subject" maxlength="30" class="txt" />
 							</c:if></td>
 					</tr>
 					<tr>

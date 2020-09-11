@@ -10,5 +10,5 @@ public interface MemberService {
 
 	int insertUser(MemberVO vo, HttpServletRequest request);
 
-	Integer searchUser(HttpServletRequest request, MemberVO vo) throws Exception;
+	Integer searchUser(MemberVO vo) throws Exception;
 }

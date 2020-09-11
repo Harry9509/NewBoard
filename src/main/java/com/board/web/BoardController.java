@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,20 +65,29 @@ public class BoardController {
 		System.out.println("boardController : addBoard");
 		model.addAttribute("boardVO", new BoardVO());
 		model.addAttribute("type", "create");
+		
+		BoardVO boardVO = new BoardVO();
+		System.out.println("..........." + boardVO.getM_uid() + "m_uid 가져와봐");
+		System.out.println("..........." + boardVO.getUid() + "uid 가져와봐");
 
 		return "boardRegister";
 	}
 
 	@RequestMapping(value = "/addBoard.do", method = RequestMethod.POST)
-	public String addBoardDO(@ModelAttribute BoardVO boardVO, String[] fileUids, Model model,
+	public String addBoardDO(@ModelAttribute("BoardVO") BoardVO boardVO, String[] fileUids, Model model,
 			HttpServletRequest reqeust) {
 		System.out.println("boardController : addBoardDO");
 		System.out.println(boardVO.toString());
 		System.out.println(Arrays.toString(fileUids));
-
+		System.out.println(boardVO + "boardVO가 뭐야?");
+		System.out.println("....." + boardVO.getM_uid() + "m_uid가져와봐 ");
+		System.out.println("..........." + boardVO.getUid() + "uid가져와봐 ");
+			
 		int uid = boardService.insertBoard(boardVO);
+
 		model.addAttribute("uid", String.valueOf(uid));
 
+		System.out.println("작성완료하였습니다.");
 		return "redirect:/view.do";
 
 	}
@@ -100,7 +110,7 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/updateBoard.do", method = RequestMethod.POST)
-	public String updateBoardDO(@ModelAttribute BoardVO boardVO, String[] fileUids, Model model) {
+	public String updateBoardDO(@ModelAttribute("BoardVO") BoardVO boardVO, String[] fileUids, Model model) {
 
 		System.out.println("BoardController: updateBoard");
 		System.out.println(boardVO.toString());
