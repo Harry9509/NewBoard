@@ -1,4 +1,4 @@
-var fileCnt =0;
+/*var fileCnt =0;
 var fileMap = new Map();
 var type = '';
 var br_uid = 0;
@@ -147,3 +147,4 @@ function appendImagePreview(file){
 
 
 
+*/
